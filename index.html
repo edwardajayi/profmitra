@@ -276,11 +276,28 @@
       font-size: 11px; font-weight: 700; letter-spacing: 0.25em;
       text-transform: uppercase; color: var(--crimson); margin-bottom: 24px;
     }
-    .theme-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+    .theme-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
     .theme-tag {
-      padding: 8px 20px; border-radius: 50px; font-size: 13px; font-weight: 500;
-      background: rgba(196,18,48,0.1); border: 1px solid rgba(196,18,48,0.25);
-      color: rgba(244,246,252,0.85); transition: all 0.25s ease; cursor: default;
+      padding: 8px 18px;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 500;
+      background: rgba(196,18,48,0.1);
+      border: 1px solid rgba(196,18,48,0.25);
+      color: rgba(244,246,252,0.85);
+      transition: all 0.25s ease;
+      cursor: default;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
     }
     .theme-tag:hover {
       background: rgba(196,18,48,0.2); border-color: rgba(196,18,48,0.5);
@@ -291,6 +308,31 @@
     }
     .theme-tag.gold:hover {
       background: rgba(245,158,11,0.2); border-color: rgba(245,158,11,0.5);
+    }
+
+    @media (max-width: 768px) {
+      .theme-tags {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        max-width: 580px;
+      }
+      .theme-tag {
+        font-size: 12px;
+        padding: 8px 10px;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .theme-tags {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+      }
+      .theme-tag {
+        font-size: 11px;
+        padding: 7px 6px;
+        line-height: 1.3;
+      }
     }
 
     /* TESTIMONIALS */

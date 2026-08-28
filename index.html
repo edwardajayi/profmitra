@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tribute to Prof. Prasenjit Mitra · SaLT Lab, CMU Africa</title>
+  <meta name="description" content="A heartfelt tribute from lab members and mentees of the Spatial and Language Technologies Lab to Prof. Prasenjit Mitra, Research Professor at Carnegie Mellon University Africa." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --midnight: #080d1a;
+      --slate:    #0e1628;
+      --navy:     #111d35;
+      --crimson:  #c41230;
+      --rose:     #e8254a;
+      --gold:     #f59e0b;
+      --amber:    #fbbf24;
+      --white:    #f4f6fc;
+      --muted:    #8b9dc3;
+      --glass-bg: rgba(14, 22, 48, 0.55);
+      --glass-border: rgba(196, 18, 48, 0.18);
+      --font-sans: 'Outfit', system-ui, sans-serif;
+      --font-serif: 'Lora', Georgia, serif;
+    }
+
+    /* ── LIGHT MODE OVERRIDES ─────────────────────────────── */
+    body.light {
+      --midnight: #f7f4ef;
+      --slate:    #ede9e2;
+      --navy:     #e4dfd6;
+      --white:    #1a1f2e;
+      --muted:    #6b7280;
+      --glass-bg: rgba(255, 253, 249, 0.75);
+      --glass-border: rgba(196, 18, 48, 0.15);
+      background: #f7f4ef;
+      color: #1a1f2e;
+    }
+    body.light ::-webkit-scrollbar-track { background: #f7f4ef; }
+    body.light nav {
+      background: rgba(247, 244, 239, 0.92);
+      border-bottom-color: rgba(196, 18, 48, 0.12);
+      box-shadow: 0 1px 24px rgba(0,0,0,0.06);
+    }
+    body.light .hero::before {
+      background: radial-gradient(ellipse at center, rgba(196,18,48,0.07) 0%, transparent 70%);
+    }
+    body.light .hero-avatar-initials {
+      background: linear-gradient(135deg, #e8e0d5, #ede9e2);
+    }
+    body.light .avatar-ring-mask { background: #f7f4ef; }
+    body.light .glow-dot { border-color: #f7f4ef; }
+    body.light .hero-name {
+      background: linear-gradient(135deg, #1a1f2e 30%, #b45309 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    body.light .hero-msg {
+      background: rgba(255,253,249,0.85);
+      border-color: rgba(196,18,48,0.12);
+      color: rgba(30,35,50,0.82);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+    body.light .hero-msg::before { opacity: 0.25; }
+    body.light .stat-divider { background: rgba(196,18,48,0.2); }
+    body.light .theme-tag {
+      background: rgba(196,18,48,0.07);
+      border-color: rgba(196,18,48,0.18);
+      color: #1a1f2e;
+    }
+    body.light .theme-tag:hover { background: rgba(196,18,48,0.14); color: #1a1f2e; }
+    body.light .theme-tag.gold { background: rgba(180,83,9,0.07); border-color: rgba(180,83,9,0.2); }
+    body.light .theme-tag.gold:hover { background: rgba(180,83,9,0.14); }
+    body.light .testimonial-card {
+      background: rgba(255,253,249,0.9);
+      border-color: rgba(0,0,0,0.07);
+      box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+    }
+    body.light .testimonial-card:hover {
+      box-shadow: 0 16px 48px rgba(0,0,0,0.1), 0 0 30px rgba(196,18,48,0.06);
+      border-color: rgba(196,18,48,0.18);
+    }
+    body.light .card-text { color: rgba(30,35,50,0.78); }
+    body.light .card-name { color: #1a1f2e; }
+    body.light .card-role { color: #6b7280; }
+    body.light .applaud-btn {
+      background: rgba(180,83,9,0.07);
+      border-color: rgba(180,83,9,0.2);
+      color: #b45309;
+    }
+    body.light .applaud-btn:hover { background: rgba(180,83,9,0.14); border-color: rgba(180,83,9,0.35); }
+    body.light .applaud-btn.done { background: rgba(180,83,9,0.18); border-color: #b45309; color: #92400e; }
+    body.light .expand-btn { color: #b45309; }
+    body.light .expand-btn:hover { color: #92400e; }
+    body.light footer { border-top-color: rgba(196,18,48,0.12); }
+    body.light .footer-msg { color: rgba(30,35,50,0.65); }
+    body.light .footer-sub { color: rgba(107,114,128,0.6); }
+    body.light #graph-canvas { opacity: 0.18; }
+    body.light .scroll-hint { color: #6b7280; }
+    body.light .photo-hint { color: rgba(107,114,128,0.4); }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-sans);
+      background: var(--midnight);
+      color: var(--white);
+      overflow-x: hidden;
+      line-height: 1.7;
+    }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--midnight); }
+    ::-webkit-scrollbar-thumb { background: var(--crimson); border-radius: 3px; }
+
+    #graph-canvas {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0; pointer-events: none; opacity: 0.35;
+    }
+    .container {
+      max-width: 1200px; margin: 0 auto; padding: 0 24px;
+      position: relative; z-index: 1;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 16px 32px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(8,13,26,0.88); backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(196,18,48,0.15);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; }
+    .cmu-badge {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+      color: var(--crimson); text-transform: uppercase;
+      padding: 4px 10px; border: 1px solid rgba(196,18,48,0.4); border-radius: 4px;
+    }
+    .lab-name { font-size: 13px; color: var(--muted); }
+    .nav-actions { display: flex; align-items: center; gap: 10px; }
+    .nav-btn {
+      display: flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, var(--crimson), var(--rose));
+      color: #fff; border: none; padding: 10px 22px; border-radius: 50px;
+      font-family: var(--font-sans); font-size: 13px; font-weight: 600;
+      cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(196,18,48,0.35);
+    }
+    .nav-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(196,18,48,0.5); }
+
+    /* theme toggle pill */
+    .theme-toggle {
+      display: flex; align-items: center; gap: 0;
+      background: rgba(139,157,195,0.12);
+      border: 1px solid rgba(139,157,195,0.2);
+      border-radius: 50px; padding: 3px; cursor: pointer;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .theme-toggle:hover { background: rgba(139,157,195,0.2); }
+    .tt-opt {
+      padding: 6px 14px; border-radius: 50px; font-size: 12px; font-weight: 600;
+      font-family: var(--font-sans); color: var(--muted);
+      transition: background 0.25s, color 0.25s;
+      user-select: none; white-space: nowrap;
+    }
+    .tt-opt.active {
+      background: var(--white); color: var(--midnight);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    body.light .theme-toggle { background: rgba(0,0,0,0.06); border-color: rgba(0,0,0,0.1); }
+    body.light .tt-opt { color: #6b7280; }
+    body.light .tt-opt.active { background: #1a1f2e; color: #f7f4ef; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+    body.light .nav-btn { box-shadow: 0 4px 20px rgba(196,18,48,0.2); }
+
+    /* HERO */
+    .hero {
+      padding: 160px 0 100px; text-align: center;
+      position: relative; z-index: 1;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      width: 700px; height: 700px;
+      background: radial-gradient(ellipse at center, rgba(196,18,48,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-avatar-wrapper {
+      position: relative; display: inline-block; margin-bottom: 40px;
+    }
+    .avatar-ring {
+      position: absolute; inset: -8px; border-radius: 50%;
+      background: conic-gradient(from 0deg, var(--crimson), var(--gold), var(--crimson), var(--gold), var(--crimson));
+      animation: spin 8s linear infinite;
+    }
+    .avatar-ring-mask {
+      position: absolute; inset: 2px; border-radius: 50%;
+      background: var(--midnight);
+    }
+    .hero-avatar-img {
+      position: relative; width: 160px; height: 160px;
+      border-radius: 50%; object-fit: cover; display: block; z-index: 2;
+    }
+    .hero-avatar-initials {
+      position: relative; width: 160px; height: 160px; border-radius: 50%;
+      background: linear-gradient(135deg, #1a2744, #0e1628);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 52px; font-weight: 800; color: var(--crimson); z-index: 2;
+    }
+    .glow-dot {
+      position: absolute; bottom: 8px; right: 8px;
+      width: 20px; height: 20px; border-radius: 50%;
+      background: var(--gold); border: 3px solid var(--midnight);
+      z-index: 3; box-shadow: 0 0 14px var(--gold);
+    }
+    .photo-hint {
+      position: absolute; bottom: -28px; left: 50%; transform: translateX(-50%);
+      font-size: 10px; color: rgba(139,157,195,0.45); white-space: nowrap; font-style: italic;
+    }
+
+    .eyebrow {
+      font-size: 12px; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--crimson); margin-bottom: 16px;
+    }
+    .hero-name {
+      font-size: clamp(38px, 6vw, 70px); font-weight: 800; line-height: 1.1;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #f4f6fc 30%, var(--gold) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-title { font-size: 18px; font-weight: 400; color: var(--muted); margin-bottom: 8px; }
+    .hero-title strong { color: var(--white); font-weight: 600; }
+    .hero-sub {
+      font-size: 14px; color: rgba(139,157,195,0.65);
+      margin-bottom: 44px; font-style: italic; font-family: var(--font-serif);
+    }
+
+    .hero-stats {
+      display: flex; justify-content: center; gap: 40px;
+      flex-wrap: wrap; margin-bottom: 48px;
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-size: 38px; font-weight: 800; color: var(--gold);
+      line-height: 1; display: block;
+    }
+    .stat-lbl {
+      font-size: 11px; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px;
+    }
+    .stat-divider { width: 1px; height: 48px; background: rgba(196,18,48,0.3); align-self: center; }
+
+    .hero-msg {
+      max-width: 620px; margin: 0 auto 48px;
+      padding: 28px 36px;
+      background: var(--glass-bg); backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border); border-radius: 16px;
+      font-family: var(--font-serif); font-size: 17px; font-style: italic;
+      color: rgba(244,246,252,0.85); line-height: 1.8; position: relative;
+    }
+    .hero-msg::before {
+      content: '"'; position: absolute; top: -20px; left: 20px;
+      font-size: 80px; font-family: var(--font-serif);
+      color: var(--crimson); opacity: 0.4; line-height: 1;
+    }
+
+    .scroll-hint {
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px; color: var(--muted); font-size: 13px;
+      animation: bounce 2s infinite;
+    }
+
+    /* THEMES */
+    .themes-section {
+      padding: 60px 0 40px; text-align: center; position: relative; z-index: 1;
+    }
+    .section-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--crimson); margin-bottom: 24px;
+    }
+    .theme-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+    .theme-tag {
+      padding: 8px 20px; border-radius: 50px; font-size: 13px; font-weight: 500;
+      background: rgba(196,18,48,0.1); border: 1px solid rgba(196,18,48,0.25);
+      color: rgba(244,246,252,0.85); transition: all 0.25s ease; cursor: default;
+    }
+    .theme-tag:hover {
+      background: rgba(196,18,48,0.2); border-color: rgba(196,18,48,0.5);
+      transform: translateY(-2px); color: var(--white);
+    }
+    .theme-tag.gold {
+      background: rgba(245,158,11,0.1); border-color: rgba(245,158,11,0.25);
+    }
+    .theme-tag.gold:hover {
+      background: rgba(245,158,11,0.2); border-color: rgba(245,158,11,0.5);
+    }
+
+    /* TESTIMONIALS */
+    .testimonials-section { padding: 40px 0 100px; position: relative; z-index: 1; }
+    .section-header { text-align: center; margin-bottom: 56px; }
+    .section-title { font-size: 36px; font-weight: 700; margin-bottom: 8px; }
+    .section-title span { color: var(--crimson); }
+    .section-desc { font-size: 15px; color: var(--muted); }
+
+    .testimonial-grid { columns: 3; column-gap: 24px; }
+    @media (max-width: 1024px) { .testimonial-grid { columns: 2; } }
+    @media (max-width: 640px)  { .testimonial-grid { columns: 1; } }
+
+    .testimonial-card {
+      break-inside: avoid; margin-bottom: 24px;
+      background: var(--glass-bg); backdrop-filter: blur(16px);
+      border: 1px solid rgba(139,157,195,0.12); border-radius: 20px;
+      padding: 28px; position: relative; overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    .testimonial-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--crimson), var(--gold));
+      transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease;
+    }
+    .testimonial-card:hover::before { transform: scaleX(1); }
+    .testimonial-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.4), 0 0 40px rgba(196,18,48,0.08);
+      border-color: rgba(196,18,48,0.2);
+    }
+    .quote-mark {
+      font-family: var(--font-serif); font-size: 56px;
+      color: var(--crimson); opacity: 0.25; line-height: 0.6;
+      margin-bottom: 12px; display: block;
+    }
+    .card-text {
+      font-size: 14.5px; line-height: 1.85; color: rgba(244,246,252,0.8);
+      font-family: var(--font-serif); font-style: italic; margin-bottom: 16px;
+      display: -webkit-box; -webkit-line-clamp: 6; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .card-text.expanded { -webkit-line-clamp: unset; }
+    .expand-btn {
+      background: none; border: none; color: var(--gold);
+      font-family: var(--font-sans); font-size: 12px; font-weight: 600;
+      cursor: pointer; padding: 0; margin-bottom: 16px;
+      letter-spacing: 0.05em; display: none;
+    }
+    .expand-btn.show { display: inline-block; }
+    .expand-btn:hover { color: var(--amber); }
+
+    .card-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .card-author { display: flex; align-items: center; gap: 12px; }
+    .card-av {
+      width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 700; color: #fff;
+    }
+    .card-name { font-size: 14px; font-weight: 600; color: var(--white); line-height: 1.3; }
+    .card-role { font-size: 11px; color: var(--muted); }
+    .applaud-btn {
+      display: flex; align-items: center; gap: 6px;
+      background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.2);
+      color: var(--gold); padding: 7px 14px; border-radius: 50px;
+      font-size: 13px; font-weight: 600; font-family: var(--font-sans);
+      cursor: pointer; transition: all 0.2s ease; white-space: nowrap;
+    }
+    .applaud-btn:hover { background: rgba(245,158,11,0.2); border-color: rgba(245,158,11,0.4); transform: scale(1.05); }
+    .applaud-btn.done { background: rgba(245,158,11,0.25); border-color: var(--gold); color: var(--amber); }
+
+    /* FOOTER */
+    footer {
+      position: relative; z-index: 1; text-align: center;
+      padding: 60px 24px 40px;
+      border-top: 1px solid rgba(196,18,48,0.15);
+    }
+    .footer-msg {
+      font-family: var(--font-serif); font-size: 22px; font-style: italic;
+      color: rgba(244,246,252,0.7); margin-bottom: 16px;
+    }
+    .footer-msg span { color: var(--gold); font-style: normal; font-weight: 600; }
+    .footer-sub { font-size: 12px; color: rgba(139,157,195,0.45); letter-spacing: 0.1em; }
+
+    #confetti-canvas {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%; pointer-events: none; z-index: 999;
+    }
+
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+    @keyframes fadeInUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+    .fiu { animation: fadeInUp 0.7s ease both; }
+    .d1 { animation-delay: 0.05s; }
+    .d2 { animation-delay: 0.15s; }
+    .d3 { animation-delay: 0.25s; }
+    .d4 { animation-delay: 0.35s; }
+  </style>
+</head>
+<body>
+
+<canvas id="graph-canvas"></canvas>
+<canvas id="confetti-canvas"></canvas>
+
+<nav>
+  <div class="nav-logo">
+    <span class="cmu-badge">CMU Africa</span>
+    <span class="lab-name">SaLT Lab</span>
+  </div>
+  <div class="nav-actions">
+    <div class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" role="button" aria-label="Toggle light/dark mode" title="Switch theme">
+      <span class="tt-opt" id="tt-dark">🌙 Dark</span>
+      <span class="tt-opt" id="tt-light">☀️ Light</span>
+    </div>
+    <button class="nav-btn" onclick="bigCelebration()">🎉 Celebrate Prof. Mitra</button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <p class="eyebrow fiu">A Heartfelt Tribute · August 2026</p>
+
+    <div class="hero-avatar-wrapper fiu d1">
+      <div class="avatar-ring"></div>
+      <div class="avatar-ring-mask"></div>
+      <div class="hero-avatar-initials" id="hero-av">PM</div>
+      <div class="glow-dot"></div>
+    </div>
+
+    <h1 class="hero-name fiu d2">Prof. Prasenjit Mitra</h1>
+    <p class="hero-title fiu d2"><strong>Research Professor</strong> · Carnegie Mellon University Africa</p>
+    <p class="hero-sub fiu d3">Director, Spatial &amp; Language Technologies (SaLT) Lab</p>
+
+    <div class="hero-stats fiu d3">
+      <div class="stat">
+        <span class="stat-num" id="cnt">0</span>
+        <span class="stat-lbl">Voices of Gratitude</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-num">∞</span>
+        <span class="stat-lbl">Lessons Shared</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-num">1</span>
+        <span class="stat-lbl">Remarkable Mentor</span>
+      </div>
+    </div>
+
+    <div class="hero-msg fiu d4">
+      From the halls of Carnegie Mellon University Africa to your next chapter — 
+      your impact on each of us runs deeper than any research paper could capture.
+    </div>
+
+    <div class="scroll-hint">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+      </svg>
+      Read the messages below
+    </div>
+  </div>
+</section>
+
+<section class="themes-section">
+  <div class="container">
+    <p class="section-label">Themes from the heart</p>
+    <div class="theme-tags">
+      <span class="theme-tag">🔍 Ask Better Questions</span>
+      <span class="theme-tag gold">✨ Believing in Us</span>
+      <span class="theme-tag">📝 Research Mastery</span>
+      <span class="theme-tag gold">🌍 CMU Africa Pioneer</span>
+      <span class="theme-tag">💬 Critical Thinking</span>
+      <span class="theme-tag gold">🚀 Pushing Boundaries</span>
+      <span class="theme-tag">🎓 Mentorship &amp; Guidance</span>
+      <span class="theme-tag gold">🤝 Always Open to Ideas</span>
+      <span class="theme-tag">📖 Academic Writing</span>
+      <span class="theme-tag gold">❤️ Personal Impact</span>
+      <span class="theme-tag">🥂 First Publications</span>
+      <span class="theme-tag gold">🌿 Patience &amp; Encouragement</span>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials-section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Messages from the <span>SaLT Lab Family</span></h2>
+      <p class="section-desc">11 voices, one truth — you made a difference.</p>
+    </div>
+    <div class="testimonial-grid" id="grid"></div>
+  </div>
+</section>
+
+<footer>
+  <p class="footer-msg">
+    To a professor who made us <span>better thinkers</span>, better researchers, and better people.
+  </p>
+  <p class="footer-sub">Spatial &amp; Language Technologies Lab · Carnegie Mellon University Africa · 2026</p>
+</footer>
+
+<script>
+/* ── DATA ───────────────────────────────────────────────── */
+const testimonials = [
+  { name: "Bruce M", role: "SaLT Lab Member", text: "Good Luck Prof and wishing you the mightest. One thing I learnt from you was to ask as many WHAT and WHY questions and I found it helped me better understand to a deeper extent. Thank you very very much." },
+  { name: "John Uzodinma", role: "SaLT Lab Mentee", text: "Thank you so much for your mentorship and support Prof. My time working with you was very short but impactful in many ways. Everyday I wish you weren't leaving but I'm confident in the fact that I can build upon what I've learnt these few weeks.\n\nI wish you all the best in New Zealand and all your future endeavours that follow after that.\n\nCheers to more learning, collaboration and continued progress, Prof!\n\nI'll definitely miss you." },
+  { name: "Yabsera Yemanberhan", role: "SaLT Lab Researcher", text: "I'm truly grateful to have had the opportunity to learn from you, Professor Mitra. You taught me not only how to do research properly, but also how to think critically, communicate ideas clearly, and approach academic work with greater confidence. I've also really valued your guidance and advice about both my academic and career journey. Thank you for being not just a teacher, but also a mentor who has supported and encouraged me throughout this journey. I wish you all the very best in your next chapter, and I hope to carry the lessons and guidance you've given me forward. Thank you for everything!" },
+  { name: "Leonard Twagirayezu", role: "SaLT Lab Researcher", text: "Your dedication to making us better will remain with me forever. I like the way you always want to do better. I am a better person and researcher because of you. Thank you for everything you have done for me and our lab." },
+  { name: "Blessed Madukoma", role: "SaLT Lab Member", text: "Thank you, Prof. Mitra, for your guidance over the past year; I have learnt so much from you about research, critical review, writing, perseverance, and asking the right questions — lessons I will carry with me throughout my career." },
+  { name: "Edward Ajayi", role: "SaLT Lab Researcher", text: "Thank you so much for everything, Prof. Mitra. The past year working with you has been an amazing experience. You've inspired me to always strive for excellence, ask questions, aim higher, and never settle for less than my best.\n\nUnder your guidance, I've developed much more confidence in my ability to do research and tackle challenging problems. You've been an amazing advisor — always pushing for results, but also pushing me to become better along the way.\n\nThank you for everything, Prof. I'm truly grateful for your guidance and support, and I wish you all the very best in the next chapter." },
+  { name: "Vicky Uwase", role: "SaLT Lab Researcher", text: "Dear Prof. Prasenjit, thank you for your guidance, support, and the positive impact you've had on all of us. Your mentorship, kindness, and willingness to share your knowledge have made a real difference in our research journey. Personally, I'll always be grateful for the way you believed in me, challenged me to grow, and encouraged me to keep pursuing my dreams. Wishing you a wonderful new chapter ahead and may all the opportunities that come your way bring you continued success and fulfillment. 🤍\n\nBest wishes, Vicky" },
+  { name: "Wongel Daniel", role: "SaLT Lab Member", text: "I really admire the way you approach your work, and I think that's something I'll carry with me for a long time. You taught me how to ask better questions and not be satisfied with the first answer. I also really appreciated that you let me explore my own interests and were always open when I wanted to change direction. I've learned a lot from working with you. Thank you for all the guidance, the patience, and the jokes. It won't be the same without you around. All the best!" },
+  { name: "Victor Olufemi", role: "SaLT Lab Researcher", text: "Dear Professor Mitra, I want to say a huge shout out to you for pushing me and everyone at the lab to bring out the best version of ourselves and not settle for less. If anything, we've learned to aim higher and we've seen firsthand that doing hard things is possible and achievable.\n\nThank you for the lessons, advice, connections, and valuable feedback. They are truly appreciated.\n\nWishing you an amazing new chapter. Cheers, Victor." },
+  { name: "Irene Busah", role: "SaLT Lab Researcher", text: "Prof. Mitra, I am deeply grateful that I had the opportunity to work with you. You were much more than a supervisor to me — you shared not only your academic knowledge, but also the wisdom you gained through your own career and life journey. At moments when I had lost opportunities and was questioning what came next, your encouragement reminded me to keep going and not give up. I am especially glad that I was persistent in seeking the opportunity to work with you, because it has been one of the most meaningful parts of my journey. Wherever your next chapter takes you, I hope you know that you will always have a student in me. Thank you for believing in me, for your guidance, and for the wisdom you so generously shared. I wish you every happiness and success in what comes next. You will be greatly missed, Professor." },
+  { name: "Obed Irakoze", role: "SaLT Lab Researcher", text: "Thank you so much, Prof. Mitra, for trusting me, giving me the opportunity to work with you, and pushing me beyond what I thought I could do. You taught me so much about research and helped me achieve my first publication. I wish you all the best in your new journey — your next student will be very lucky to have you as their mentor!" }
+];
+
+const COLORS = [
+  'linear-gradient(135deg,#c41230,#e8254a)',
+  'linear-gradient(135deg,#7c3aed,#a855f7)',
+  'linear-gradient(135deg,#0891b2,#06b6d4)',
+  'linear-gradient(135deg,#d97706,#f59e0b)',
+  'linear-gradient(135deg,#059669,#10b981)',
+  'linear-gradient(135deg,#be185d,#ec4899)',
+  'linear-gradient(135deg,#2563eb,#60a5fa)',
+  'linear-gradient(135deg,#9333ea,#c084fc)',
+  'linear-gradient(135deg,#0f766e,#14b8a6)',
+  'linear-gradient(135deg,#b45309,#fbbf24)',
+];
+
+function initials(name) {
+  return name.trim().split(/\s+/).map(w=>w[0]).join('').slice(0,2).toUpperCase();
+}
+
+/* ── RENDER ─────────────────────────────────────────────── */
+function render() {
+  const grid = document.getElementById('grid');
+  testimonials.forEach((t, i) => {
+    const card = document.createElement('div');
+    card.className = 'testimonial-card';
+    card.style.cssText = 'opacity:0;transform:translateY(30px);transition:opacity 0.6s ease,transform 0.6s ease;';
+    const html = t.text.replace(/\n/g,'<br>');
+    const long = t.text.length > 320;
+    card.innerHTML = `
+      <span class="quote-mark">"</span>
+      <p class="card-text" id="ct${i}">${html}</p>
+      <button class="expand-btn ${long?'show':''}" id="eb${i}" onclick="tog(${i})" aria-label="Expand message">Read more ↓</button>
+      <div class="card-footer">
+        <div class="card-author">
+          <div class="card-av" style="background:${COLORS[i%COLORS.length]}">${initials(t.name)}</div>
+          <div>
+            <div class="card-name">${t.name}</div>
+          </div>
+        </div>
+        <button class="applaud-btn" id="ab${i}" onclick="clap(${i})" aria-label="Applaud">👏 <span>0</span></button>
+      </div>`;
+    grid.appendChild(card);
+    setTimeout(() => { card.style.opacity='1'; card.style.transform='translateY(0)'; }, 120 + i*90);
+  });
+}
+
+function tog(i) {
+  const ct = document.getElementById('ct'+i);
+  const eb = document.getElementById('eb'+i);
+  ct.classList.toggle('expanded');
+  eb.textContent = ct.classList.contains('expanded') ? 'Show less ↑' : 'Read more ↓';
+}
+
+function clap(i) {
+  const btn = document.getElementById('ab'+i);
+  btn.classList.add('done');
+  const sp = btn.querySelector('span');
+  sp.textContent = +sp.textContent + 1;
+  miniConf();
+}
+
+/* ── COUNTER ────────────────────────────────────────────── */
+function counter(id, target, dur=1400) {
+  const el = document.getElementById(id);
+  let n=0, step=Math.ceil(target/(dur/16));
+  const t = setInterval(()=>{ n=Math.min(n+step,target); el.textContent=n; if(n>=target)clearInterval(t); },16);
+}
+
+/* ── CONFETTI ───────────────────────────────────────────── */
+const CC = document.getElementById('confetti-canvas');
+const CX = CC.getContext('2d');
+let parts=[], rafId=null;
+function szConf(){ CC.width=innerWidth; CC.height=innerHeight; }
+szConf(); addEventListener('resize', szConf);
+
+function spawn(x,y,n=80){
+  const cols=['#c41230','#e8254a','#f59e0b','#fbbf24','#f4f6fc','#a855f7','#60a5fa','#10b981'];
+  for(let i=0;i<n;i++) parts.push({
+    x,y,vx:(Math.random()-.5)*12,vy:Math.random()*-14-4,
+    c:cols[Math.random()*cols.length|0],s:Math.random()*8+4,
+    l:1,d:Math.random()*.018+.007,r:Math.random()*360,rs:(Math.random()-.5)*10,
+    sh:Math.random()>.5?'r':'c'
+  });
+}
+function drawConf(){
+  CX.clearRect(0,0,CC.width,CC.height);
+  parts=parts.filter(p=>p.l>0);
+  parts.forEach(p=>{
+    p.x+=p.vx; p.y+=p.vy; p.vy+=0.4; p.vx*=.99; p.r+=p.rs; p.l-=p.d;
+    CX.save(); CX.globalAlpha=p.l; CX.fillStyle=p.c;
+    CX.translate(p.x,p.y); CX.rotate(p.r*Math.PI/180);
+    p.sh==='r' ? CX.fillRect(-p.s/2,-p.s/4,p.s,p.s/2) : (CX.beginPath(),CX.arc(0,0,p.s/2,0,Math.PI*2),CX.fill());
+    CX.restore();
+  });
+  if(parts.length) { rafId=requestAnimationFrame(drawConf); }
+  else { rafId=null; }
+}
+function go(){ if(!rafId) drawConf(); }
+
+function bigCelebration(){
+  [.2,.5,.8].forEach(fx=>spawn(innerWidth*fx,innerHeight*.65,65));
+  go();
+}
+function miniConf(){ spawn(innerWidth/2,innerHeight*.5,28); go(); }
+
+/* ── BACKGROUND GRAPH ───────────────────────────────────── */
+const GC=document.getElementById('graph-canvas');
+const GX=GC.getContext('2d');
+let gw,gh,nodes=[];
+function szG(){ gw=GC.width=innerWidth; gh=GC.height=innerHeight; }
+szG(); addEventListener('resize',szG);
+function mkNodes(){
+  nodes=[];
+  for(let i=0;i<55;i++) nodes.push({
+    x:Math.random()*gw, y:Math.random()*gh,
+    vx:(Math.random()-.5)*.45, vy:(Math.random()-.5)*.45,
+    r:Math.random()*2.5+1, t:Math.random()>.7?'g':'c'
+  });
+}
+mkNodes();
+function drawG(){
+  GX.clearRect(0,0,gw,gh);
+  nodes.forEach(n=>{ n.x+=n.vx; n.y+=n.vy; if(n.x<0||n.x>gw)n.vx*=-1; if(n.y<0||n.y>gh)n.vy*=-1; });
+  for(let i=0;i<nodes.length;i++){
+    for(let j=i+1;j<nodes.length;j++){
+      const dx=nodes[i].x-nodes[j].x, dy=nodes[i].y-nodes[j].y;
+      const d=Math.sqrt(dx*dx+dy*dy);
+      if(d<160){
+        const edgeAlpha = (1-d/160) * (window._lightMode ? 0.18 : 0.3);
+        GX.beginPath(); GX.moveTo(nodes[i].x,nodes[i].y); GX.lineTo(nodes[j].x,nodes[j].y);
+        GX.strokeStyle=`rgba(196,18,48,${edgeAlpha})`; GX.lineWidth=.8; GX.stroke();
+      }
+    }
+  }
+  nodes.forEach(n=>{
+    const c=n.t==='g'?[245,158,11]:[196,18,48];
+    const gr=GX.createRadialGradient(n.x,n.y,0,n.x,n.y,n.r*5);
+    gr.addColorStop(0,`rgba(${c},0.55)`); gr.addColorStop(1,`rgba(${c},0)`);
+    GX.beginPath(); GX.arc(n.x,n.y,n.r*5,0,Math.PI*2); GX.fillStyle=gr; GX.fill();
+    GX.beginPath(); GX.arc(n.x,n.y,n.r,0,Math.PI*2); GX.fillStyle=`rgba(${c},.9)`; GX.fill();
+  });
+  requestAnimationFrame(drawG);
+}
+drawG();
+
+/* ── PHOTO AUTO-LOAD ────────────────────────────────── */
+(function(){
+  const candidates = ['mitra.jpeg','mitra.jpg','prof.jpeg','prof.jpg'];
+  function tryNext(i) {
+    if (i >= candidates.length) return;
+    const img = new Image();
+    img.onload = function() {
+      const av = document.getElementById('hero-av');
+      if (!av) return;
+      const el = document.createElement('img');
+      el.src = candidates[i];
+      el.className = 'hero-avatar-img';
+      el.alt = 'Prof. Prasenjit Mitra';
+      av.replaceWith(el);
+    };
+    img.onerror = function() { tryNext(i + 1); };
+    img.src = candidates[i];
+  }
+  tryNext(0);
+})();
+
+/* ── THEME TOGGLE ──────────────────────────────────────── */
+function applyTheme(isLight) {
+  document.body.classList.toggle('light', isLight);
+  document.getElementById('tt-dark').classList.toggle('active', !isLight);
+  document.getElementById('tt-light').classList.toggle('active', isLight);
+  // update graph canvas edge color
+  window._lightMode = isLight;
+}
+
+function toggleTheme() {
+  const isLight = !document.body.classList.contains('light');
+  applyTheme(isLight);
+  try { localStorage.setItem('pm-theme', isLight ? 'light' : 'dark'); } catch(e) {}
+}
+
+/* ── INIT ───────────────────────────────────────────────── */
+document.addEventListener('DOMContentLoaded',()=>{
+  render();
+  counter('cnt', testimonials.length, 1400);
+  // restore saved theme
+  let saved = 'dark';
+  try { saved = localStorage.getItem('pm-theme') || 'dark'; } catch(e) {}
+  applyTheme(saved === 'light');
+});
+</script>
+</body>
+</html>
